@@ -39,8 +39,10 @@ class TVShowFragemnt : Fragment() {
 
     private fun setupObservers() {
         viewModel.getTopRatedTVSHOWS().observe(viewLifecycleOwner, {
+
             it?.let { resource ->
                 when (resource.status) {
+
                     Resource.Status.SUCCESS -> {
 
                         val tvAdapter = TVAdapter()
@@ -59,12 +61,15 @@ class TVShowFragemnt : Fragment() {
                     Resource.Status.LOADING -> {
 
                     }
+
+
                 }
             }
         })
         viewModel.getPopularTVSHOWS().observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
+
                     Resource.Status.SUCCESS -> {
 
                         val tvAdapter = TVAdapter()
@@ -89,6 +94,7 @@ class TVShowFragemnt : Fragment() {
         viewModel.getAiringTodayTVSHOWS().observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
+
                     Resource.Status.SUCCESS -> {
 
                         val tvAdapter = TVAdapter()
@@ -107,12 +113,14 @@ class TVShowFragemnt : Fragment() {
                     Resource.Status.LOADING -> {
 
                     }
+
                 }
             }
         })
         viewModel.getOnTheAirTVSHOWS().observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
+
                     Resource.Status.SUCCESS -> {
 
                         val tvAdapter = TVAdapter()
@@ -131,6 +139,8 @@ class TVShowFragemnt : Fragment() {
                     Resource.Status.LOADING -> {
 
                     }
+
+
                 }
             }
         })
@@ -139,6 +149,7 @@ class TVShowFragemnt : Fragment() {
         viewModel.getTopActionTv().observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
+
                     Resource.Status.SUCCESS -> {
 
                         val tvAdapter = TVAdapter()
@@ -157,6 +168,7 @@ class TVShowFragemnt : Fragment() {
                     Resource.Status.LOADING -> {
 
                     }
+
                 }
             }
         })
@@ -187,6 +199,7 @@ class TVShowFragemnt : Fragment() {
         viewModel.getTopComedyTv().observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
+
                     Resource.Status.SUCCESS -> {
 
                         val tvAdapter = TVAdapter()
@@ -205,12 +218,15 @@ class TVShowFragemnt : Fragment() {
                     Resource.Status.LOADING -> {
 
                     }
+
+
                 }
             }
         })
         viewModel.getTopWarTv().observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
+
                     Resource.Status.SUCCESS -> {
 
                         val tvAdapter = TVAdapter()
@@ -229,6 +245,8 @@ class TVShowFragemnt : Fragment() {
                     Resource.Status.LOADING -> {
 
                     }
+
+
                 }
             }
         })

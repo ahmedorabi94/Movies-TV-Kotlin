@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.galleryapp.data.entity.Movie
 import com.example.galleryapp.databinding.GridViewItemBinding
+import com.example.galleryapp.ui.callback.MovieCallback
 
 
-class MovieAdapter() : ListAdapter<Movie, MovieAdapter.MyViewHolder>(DiffCallback) {
+class MovieAdapter(private val movieCallback: MovieCallback) :
+    ListAdapter<Movie, MovieAdapter.MyViewHolder>(DiffCallback) {
 
 
     companion object DiffCallback : DiffUtil.ItemCallback<Movie>() {
@@ -24,7 +26,9 @@ class MovieAdapter() : ListAdapter<Movie, MovieAdapter.MyViewHolder>(DiffCallbac
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = GridViewItemBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
+        val binding =
+            GridViewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding.callback = movieCallback
         return MyViewHolder(binding)
     }
 

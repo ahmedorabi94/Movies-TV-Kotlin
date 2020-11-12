@@ -8,9 +8,12 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.example.galleryapp.R
+import com.example.galleryapp.data.entity.Movie
 import com.example.galleryapp.databinding.FragmentMoviesBinding
 import com.example.galleryapp.ui.adapter.MovieAdapter
+import com.example.galleryapp.ui.callback.MovieCallback
 import com.example.galleryapp.utils.Resource
 import com.example.galleryapp.viewmodels.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +26,29 @@ class MoviesFragment : Fragment() {
     private val viewModel: MoviesViewModel by viewModels()
 
     private lateinit var binding: FragmentMoviesBinding
+
+
+
+
+    private val movieCallback = object : MovieCallback {
+        override fun onClickMovie(movie: Movie) {
+            val arguments = Bundle()
+            arguments.putInt("id", movie.id)
+            arguments.putString("title", movie.title)
+            arguments.putString("image", movie.poster_path)
+            arguments.putString("overview", movie.overview)
+            arguments.putString("release_date", movie.release_date)
+            arguments.putDouble("vote_average", movie.vote_average)
+            arguments.putString("backdrop_path", movie.backdrop_path)
+            arguments.putString("TYPE", "MOVIE_VALUE")
+            arguments.putString("language", movie.original_language)
+            arguments.putLong("count", movie.vote_count)
+
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_moviesFragment_to_detailFragment, arguments)
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +69,9 @@ class MoviesFragment : Fragment() {
     }
 
 
+
+
+
     private fun setupObservers() {
 
 
@@ -53,7 +82,7 @@ class MoviesFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
 
-                        val movieAdapter = MovieAdapter()
+                        val movieAdapter = MovieAdapter(movieCallback)
 
                         resource.data?.let {
                             movieAdapter.submitList(resource.data.results)
@@ -85,7 +114,7 @@ class MoviesFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
 
-                        val movieAdapter = MovieAdapter()
+                        val movieAdapter = MovieAdapter(movieCallback)
                         resource.data?.let {
 
                             movieAdapter.submitList(resource.data.results)
@@ -118,7 +147,7 @@ class MoviesFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
 
-                        val movieAdapter = MovieAdapter()
+                        val movieAdapter = MovieAdapter(movieCallback)
 
                         resource.data?.let {
                             movieAdapter.submitList(resource.data.results)
@@ -150,7 +179,7 @@ class MoviesFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
 
-                        val movieAdapter = MovieAdapter()
+                        val movieAdapter = MovieAdapter(movieCallback)
 
                         resource.data?.let {
                             movieAdapter.submitList(resource.data.results)
@@ -176,7 +205,7 @@ class MoviesFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
 
-                        val movieAdapter = MovieAdapter()
+                        val movieAdapter = MovieAdapter(movieCallback)
 
                         resource.data?.let {
                             movieAdapter.submitList(resource.data.results)
@@ -201,7 +230,7 @@ class MoviesFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
 
-                        val movieAdapter = MovieAdapter()
+                        val movieAdapter = MovieAdapter(movieCallback)
 
                         resource.data?.let {
                             movieAdapter.submitList(resource.data.results)
@@ -226,7 +255,7 @@ class MoviesFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
 
-                        val movieAdapter = MovieAdapter()
+                        val movieAdapter = MovieAdapter(movieCallback)
 
                         resource.data?.let {
                             movieAdapter.submitList(resource.data.results)
