@@ -3,18 +3,32 @@ package com.example.galleryapp.viewmodels
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import com.example.galleryapp.api.ApiService
 import com.example.galleryapp.data.repo.MoviesFragmentRepo
+import com.example.galleryapp.paging.MoviePagingSource
 import com.example.galleryapp.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import timber.log.Timber
 
-class MoviesViewModel @ViewModelInject constructor(private val repo: MoviesFragmentRepo) :
+class MoviesViewModel @ViewModelInject constructor(
+    private val repo: MoviesFragmentRepo,
+    private val apiService: ApiService
+) :
     ViewModel() {
 
 
     private var viewModelJob = Job()
     //  private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+
+    val listData = Pager(PagingConfig(pageSize = 20)) {
+        MoviePagingSource(apiService)
+    }.flow.cachedIn(viewModelScope)
 
 
     fun getMovies() = liveData(Dispatchers.IO) {

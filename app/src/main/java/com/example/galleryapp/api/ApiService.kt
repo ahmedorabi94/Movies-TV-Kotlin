@@ -1,6 +1,7 @@
 package com.example.galleryapp.api
 
 import com.example.galleryapp.data.entity.MovieResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,6 +11,12 @@ interface ApiService {
     ///////////////////////////Movies///////////////////////////////////////
     @GET("movie/now_playing")
     suspend fun getNowPlayingMoviesAsync(@Query("api_key") apiKey: String): MovieResponse
+
+    @GET("movie/now_playing")
+    suspend fun getNowPlayingMoviesPaging(
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Long
+    ): Response<MovieResponse>
 
     @GET("movie/top_rated")
     suspend fun getTopRated(@Query("api_key") apiKey: String): MovieResponse
@@ -83,22 +90,10 @@ interface ApiService {
 ////////////////////////////TV Shows//////////////////////////////////////////////
 
 
-
     //////////////Detail Fragment////////////////////////////////////////////////
 
 
-
     /////////////////////Detail Fragmnet
-
-
-
-
-
-
-
-
-
-
 
 
 }

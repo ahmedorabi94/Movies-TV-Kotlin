@@ -36,11 +36,20 @@
                     app:cardBackgroundColor="@color/colorPrimaryDark"
                     app:visibleGone="@{IsConnected}">
 
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingTop="4dp">
+
+                        <androidx.core.widget.ContentLoadingProgressBar
+                            android:id="@+id/progressbar"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center_horizontal"
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/tv_nowPlaying"
