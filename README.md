@@ -12,3 +12,4 @@
    - Hilt
    - Retrofit
    - Kotlin Coroutines
+   - Pagination 3
