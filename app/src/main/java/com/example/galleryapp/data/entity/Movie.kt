@@ -14,6 +14,7 @@ data class Movie(
     val original_name: String,
     val origin_country : List<String>,
 
+    val media_type : String,
 
     val adult: Boolean,
     val backdrop_path: String,

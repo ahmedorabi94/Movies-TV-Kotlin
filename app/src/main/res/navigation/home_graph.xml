@@ -21,4 +21,8 @@
         android:id="@+id/detailFragment"
         android:name="com.example.galleryapp.ui.DetailFragment"
         android:label="DetailFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.galleryapp.ui.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>
