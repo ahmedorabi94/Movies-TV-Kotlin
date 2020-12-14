@@ -1,8 +1,10 @@
 package com.example.galleryapp.api
 
 import com.example.galleryapp.data.entity.MovieResponse
+import com.example.galleryapp.data.entity.ReviewResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -92,21 +94,28 @@ interface ApiService {
 
     //////////////Detail Fragment////////////////////////////////////////////////
 
+    @GET("movie/{id}/reviews")
+    suspend fun getReviewsMovies(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String
+    ): ReviewResponse
+
+    @GET("tv/{id}/reviews")
+    suspend fun getReviewsTVs(@Path("id") id: Int, @Query("api_key") apiKey: String): ReviewResponse
+
+
 
     /////////////////////Detail Fragmnet/////////////////////////////////////////
 
 
-
     //////////////////Search///////////////////////
     @GET("search/multi")
-    suspend fun searchMoviesApi(@Query("api_key") apiKey: String , @Query("query") query: String): MovieResponse
+    suspend fun searchMoviesApi(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String
+    ): MovieResponse
 
     ////////////////Search///////////
-
-
-
-
-
 
 
 }

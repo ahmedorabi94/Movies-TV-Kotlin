@@ -1,11 +1,9 @@
 package com.example.galleryapp.data.entity
 
-
-data class MovieResponse(
-    val id : Long,
-    val dates: Dates,
+data class ReviewResponse(
+    val id: Long,
     val page: Long,
-    val results: List<Movie>,
+    val results: List<ReviewItem>,
     val total_pages: Long,
     val total_results: Long
 )

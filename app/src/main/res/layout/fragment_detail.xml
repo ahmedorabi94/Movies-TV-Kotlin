@@ -390,6 +390,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="5dp"
+                            android:text="@{`A review By ` + viewModel.reviewItem.author}"
                             android:textColor="@android:color/white"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -402,6 +403,7 @@
                             android:layout_gravity="start"
                             android:ellipsize="end"
                             android:maxLines="8"
+                            android:text="@{viewModel.reviewItem.content}"
                             android:textAlignment="gravity"
                             android:textColor="@android:color/white"
                             android:textSize="14sp" />

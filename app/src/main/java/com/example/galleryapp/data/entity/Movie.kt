@@ -3,6 +3,7 @@ package com.example.galleryapp.data.entity
 import androidx.room.ColumnInfo
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
 data class Movie(
 
@@ -15,6 +16,9 @@ data class Movie(
     val origin_country : List<String>,
 
     val media_type : String,
+    val author : String,
+    val content : String,
+    val url : String,
 
     val adult: Boolean,
     val backdrop_path: String,

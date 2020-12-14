@@ -44,7 +44,7 @@ class MoviesFragment : Fragment() {
             arguments.putString("release_date", movie.release_date)
             arguments.putDouble("vote_average", movie.vote_average)
             arguments.putString("backdrop_path", movie.backdrop_path)
-            arguments.putString("TYPE", "MOVIE_VALUE")
+            arguments.putString("type", "movie")
             arguments.putString("language", movie.original_language)
             arguments.putLong("count", movie.vote_count)
 
