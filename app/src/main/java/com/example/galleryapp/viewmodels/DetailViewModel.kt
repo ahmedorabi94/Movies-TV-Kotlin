@@ -13,8 +13,8 @@ class DetailViewModel @ViewModelInject constructor(private val repo: DetailFragm
     ViewModel() {
 
     private val movieType = MutableLiveData<MovieType>()
-    val reviewItem = ObservableField<ReviewItem>()
-
+    private val reviewItem = ObservableField<ReviewItem>()
+    val reviewItemTwo = MutableLiveData<ReviewItem>()
 
     fun getReviews(): LiveData<Resource<ReviewResponse>> = movieType.switchMap { type ->
         liveData {
@@ -35,5 +35,7 @@ class DetailViewModel @ViewModelInject constructor(private val repo: DetailFragm
     fun setReview(type: ReviewItem) {
         reviewItem.set(type)
     }
-
+    fun setReviewTwo(type: ReviewItem) {
+        reviewItemTwo.value = type
+    }
 }

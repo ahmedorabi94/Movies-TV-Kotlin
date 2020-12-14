@@ -60,6 +60,7 @@ class DetailFragment : Fragment() {
 
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         viewModel.setMovieType(MovieType(id!!, type!!, -1))
@@ -93,6 +94,7 @@ class DetailFragment : Fragment() {
                             val reviewItem = reviewList[0]
                             Timber.e(" $reviewItem")
                             viewModel.setReview(reviewItem)
+                            viewModel.setReviewTwo(reviewItem)
 
                         }
 
