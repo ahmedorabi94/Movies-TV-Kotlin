@@ -43,7 +43,7 @@ class SearchViewModel @ViewModelInject constructor(private val repository: Searc
                 }
                 .collect { response ->
                     _movies.value = response
-                   // emit(response)
+                    // emit(response)
                 }
 
 
@@ -52,7 +52,7 @@ class SearchViewModel @ViewModelInject constructor(private val repository: Searc
     }
 
 
-    fun getMoviesTwo(q : String) {
+    fun getMoviesTwo(q: String) {
         viewModelScope.launch {
             repository.getSearchMovies(q)
                 .onStart {
@@ -81,6 +81,33 @@ class SearchViewModel @ViewModelInject constructor(private val repository: Searc
             .collect {
                 emit(it)
             }
+    }
+
+    // in one line
+    val movieResult2: LiveData<MovieResponse> = repository.getSearchMovies("").asLiveData()
+
+
+    val movieResult3: LiveData<MovieResponse> = liveData {
+        repository.getSearchMovies("")
+            .onStart {
+                // emit("Loading_STRING")
+            }
+            .asLiveData()
+
+
+    }
+
+    val movieResult4: LiveData<Resource<MovieResponse>> = liveData {
+        repository.getSearchMovies("")
+            .onStart {
+                emit(Resource.loading(data = null))
+            }
+            .asLiveData()
+        //            .collect {
+//                emit(Resource.success(data = it))
+//            }
+
+
     }
 
 

@@ -40,10 +40,10 @@ class SearchFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
 
-        val toolbar = binding.toolbarDisplay
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        (activity as AppCompatActivity).supportActionBar?.title = ""
-
+//        val toolbar = binding.toolbarDisplay
+//        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+//        (activity as AppCompatActivity).supportActionBar?.title = ""
+//
 
         setupObservers()
         return binding.root

@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/moviesFragment"
+        android:id="@+id/movies_graph"
         android:icon="@drawable/ic_movie_white_24dp"
         android:title="Movies"
 
         />
     <item
-        android:id="@+id/TVShowFragemnt"
+        android:id="@+id/tv_graph"
         android:icon="@drawable/ic_television_classic_white_24dp"
         android:title="Tv Shows" />
 
+<!--    <item-->
+<!--        android:id="@+id/fav_graph"-->
+<!--        android:icon="@drawable/ic_heart_white_48dp"-->
+<!--        android:title="Favourite" />-->
     <item
-        android:id="@+id/favourite"
-        android:icon="@drawable/ic_heart_white_48dp"
-        android:title="Favourite" />
-    <item
-        android:id="@+id/searchFragment"
+        android:id="@+id/search_graph"
         android:icon="@drawable/baseline_search_white_36"
         android:title="Search" />
 </menu>

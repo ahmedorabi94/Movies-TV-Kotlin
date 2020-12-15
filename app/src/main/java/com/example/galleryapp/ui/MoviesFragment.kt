@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.galleryapp.R
 import com.example.galleryapp.data.entity.Movie
@@ -48,8 +50,8 @@ class MoviesFragment : Fragment() {
             arguments.putString("language", movie.original_language)
             arguments.putLong("count", movie.vote_count)
 
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_moviesFragment_to_detailFragment, arguments)
+            findNavController()
+                .navigate(R.id.action_moviesFragment2_to_detailFragment3, arguments)
         }
 
     }
@@ -125,7 +127,7 @@ class MoviesFragment : Fragment() {
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
 
-                        val movieAdapter = MovieAdapter(movieCallback)
+                        //   val movieAdapter = MovieAdapter(movieCallback)
 
 //                        resource.data?.let {
 //                            movieAdapter.submitList(resource.data.results)

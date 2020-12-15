@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_graph"
+    app:startDestination="@id/TVShowFragemnt2">
+
+    <fragment
+        android:id="@+id/TVShowFragemnt2"
+        android:name="com.example.galleryapp.ui.TVShowFragemnt"
+        android:label="TVShowFragemnt" />
+</navigation>
