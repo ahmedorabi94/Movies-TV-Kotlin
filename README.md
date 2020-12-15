@@ -14,3 +14,4 @@
    - Kotlin Coroutines
    - Pagination 3
    - Kotlin Flow Api
+   - Navigation Component
