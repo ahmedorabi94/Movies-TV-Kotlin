@@ -9,8 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.galleryapp.R
@@ -18,6 +16,7 @@ import com.example.galleryapp.data.entity.Movie
 import com.example.galleryapp.databinding.FragmentMoviesBinding
 import com.example.galleryapp.paging.MoviePagingAdapter
 import com.example.galleryapp.ui.adapter.MovieAdapter
+import com.example.galleryapp.ui.adapter.MovieLoadStateAdapter
 import com.example.galleryapp.ui.callback.MovieCallback
 import com.example.galleryapp.utils.Resource
 import com.example.galleryapp.viewmodels.MoviesViewModel
@@ -67,7 +66,10 @@ class MoviesFragment : Fragment() {
 
         binding.isConnected = true
 
+        binding.recyclerViewMain.setHasFixedSize(true)
+
         adapter = MoviePagingAdapter(movieCallback)
+        adapter.withLoadStateFooter(footer = MovieLoadStateAdapter { adapter.retry() })
         binding.recyclerViewMain.adapter = adapter
 
         setupObservers()

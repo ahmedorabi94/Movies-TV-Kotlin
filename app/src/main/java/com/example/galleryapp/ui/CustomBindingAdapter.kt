@@ -19,11 +19,15 @@ fun showHide(view: View, show: Boolean) {
 }
 
 @BindingAdapter("posterImage")
-fun LoadPoster(imageView: ImageView, url: String) {
+fun LoadPoster(imageView: ImageView, url: String?) {
 
-    val baseUrl = "http://image.tmdb.org/t/p/w500"
-    val finalUrl = baseUrl + url
-    Glide.with(imageView.context).load(finalUrl).into(imageView)
+    url?.let {
+        val baseUrl = "http://image.tmdb.org/t/p/w500"
+        val finalUrl = baseUrl + url
+        Glide.with(imageView.context).load(finalUrl).into(imageView)
+    }
+
+
 }
 
 @BindingAdapter("voteAverage")

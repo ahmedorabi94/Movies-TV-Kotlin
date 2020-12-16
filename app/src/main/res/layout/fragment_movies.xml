@@ -46,8 +46,8 @@
                         <androidx.core.widget.ContentLoadingProgressBar
                             android:id="@+id/progressbar"
                             style="?android:attr/progressBarStyleSmall"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             android:layout_gravity="center_horizontal"
                             android:visibility="gone" />
 
