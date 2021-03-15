@@ -61,6 +61,7 @@ class MoviesFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
 
+
         binding =
             DataBindingUtil.inflate(layoutInflater, R.layout.fragment_movies, container, false)
 
@@ -123,40 +124,39 @@ class MoviesFragment : Fragment() {
         }
 
 
+//        viewModel.getMovies().observe(viewLifecycleOwner, {
+//            it?.let { resource ->
+//                when (resource.status) {
+//                    Resource.Status.SUCCESS -> {
+//
+//                        //   val movieAdapter = MovieAdapter(movieCallback)
+//
+////                        resource.data?.let {
+////                            movieAdapter.submitList(resource.data.results)
+////                            binding.recyclerViewMain.adapter = movieAdapter
+////                        }
+//
+//
+////                        recyclerView.visibility = View.VISIBLE
+////                        progressBar.visibility = View.GONE
+////                        resource.data?.let { users -> retrieveList(users)
+////                        }
+//                    }
+//                    Resource.Status.ERROR -> {
+////                        recyclerView.visibility = View.VISIBLE
+////                        progressBar.visibility = View.GONE
+//                        Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
+//                    }
+//                    Resource.Status.LOADING -> {
+////                        progressBar.visibility = View.VISIBLE
+////                        recyclerView.visibility = View.GONE
+//                    }
+//                }
+//            }
+//        })
 
-        viewModel.getMovies().observe(viewLifecycleOwner, {
-            it?.let { resource ->
-                when (resource.status) {
-                    Resource.Status.SUCCESS -> {
 
-                        //   val movieAdapter = MovieAdapter(movieCallback)
-
-//                        resource.data?.let {
-//                            movieAdapter.submitList(resource.data.results)
-//                            binding.recyclerViewMain.adapter = movieAdapter
-//                        }
-
-
-//                        recyclerView.visibility = View.VISIBLE
-//                        progressBar.visibility = View.GONE
-//                        resource.data?.let { users -> retrieveList(users)
-//                        }
-                    }
-                    Resource.Status.ERROR -> {
-//                        recyclerView.visibility = View.VISIBLE
-//                        progressBar.visibility = View.GONE
-                        Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Resource.Status.LOADING -> {
-//                        progressBar.visibility = View.VISIBLE
-//                        recyclerView.visibility = View.GONE
-                    }
-                }
-            }
-        })
-
-
-        viewModel.getPopularMovies().observe(viewLifecycleOwner, {
+        viewModel.moviePopularResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
@@ -189,7 +189,7 @@ class MoviesFragment : Fragment() {
         })
 
 
-        viewModel.getTopRatedMovies().observe(viewLifecycleOwner, {
+        viewModel.movieTopRatedResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
@@ -221,7 +221,7 @@ class MoviesFragment : Fragment() {
         })
 
 
-        viewModel.getComingSoonMovies().observe(viewLifecycleOwner, {
+        viewModel.movieSoonResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
@@ -246,8 +246,7 @@ class MoviesFragment : Fragment() {
             }
         })
 
-
-        viewModel.getTopHorrorMovies().observe(viewLifecycleOwner, {
+        viewModel.movieHorrorResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
@@ -272,7 +271,7 @@ class MoviesFragment : Fragment() {
             }
         })
 
-        viewModel.getTopActionMovies().observe(viewLifecycleOwner, {
+        viewModel.movieActionResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
@@ -297,7 +296,7 @@ class MoviesFragment : Fragment() {
             }
         })
 
-        viewModel.getTopRomanceMovies().observe(viewLifecycleOwner, {
+        viewModel.movieRomanceResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {

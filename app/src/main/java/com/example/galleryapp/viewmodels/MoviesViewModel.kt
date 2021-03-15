@@ -1,18 +1,17 @@
 package com.example.galleryapp.viewmodels
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.galleryapp.api.ApiService
+import com.example.galleryapp.data.entity.MovieResponse
 import com.example.galleryapp.data.repo.MoviesFragmentRepo
 import com.example.galleryapp.paging.MoviePagingSource
 import com.example.galleryapp.utils.Resource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class MoviesViewModel @ViewModelInject constructor(
@@ -21,15 +20,37 @@ class MoviesViewModel @ViewModelInject constructor(
 ) :
     ViewModel() {
 
+    private val _movieResponse = MutableLiveData<Resource<MovieResponse>>()
+    val movieTopRatedResponse: LiveData<Resource<MovieResponse>> get() = _movieResponse
 
-    private var viewModelJob = Job()
-    //  private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+    private val _moviePopularResponse = MutableLiveData<Resource<MovieResponse>>()
+    val moviePopularResponse: LiveData<Resource<MovieResponse>> get() = _moviePopularResponse
 
+    private val _movieSoonResponse = MutableLiveData<Resource<MovieResponse>>()
+    val movieSoonResponse: LiveData<Resource<MovieResponse>> get() = _movieSoonResponse
+
+    private val _movieHorrorResponse = MutableLiveData<Resource<MovieResponse>>()
+    val movieHorrorResponse: LiveData<Resource<MovieResponse>> get() = _movieHorrorResponse
+
+    private val _movieActionResponse = MutableLiveData<Resource<MovieResponse>>()
+    val movieActionResponse: LiveData<Resource<MovieResponse>> get() = _movieActionResponse
+
+    private val _movieRomanceResponse = MutableLiveData<Resource<MovieResponse>>()
+    val movieRomanceResponse: LiveData<Resource<MovieResponse>> get() = _movieRomanceResponse
+
+
+    init {
+        getTopRatedMovies()
+        getPopularMovies()
+        getComingSoonMovies()
+        getTopHorrorMovies()
+        getTopActionMovies()
+        getTopRomanceMovies()
+    }
 
     val listData = Pager(PagingConfig(pageSize = 20)) {
         MoviePagingSource(apiService)
     }.flow.cachedIn(viewModelScope)
-
 
     fun getMovies() = liveData(Dispatchers.IO) {
 
@@ -42,83 +63,96 @@ class MoviesViewModel @ViewModelInject constructor(
 
     }
 
-    fun getTopRatedMovies() = liveData(Dispatchers.IO) {
+    private fun getTopRatedMovies() {
 
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = repo.getTopRated()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        viewModelScope.launch {
+            _movieResponse.value = Resource.loading(data = null)
+
+            try {
+                _movieResponse.value = Resource.success(data = repo.getTopRated())
+            } catch (exception: Exception) {
+                _movieResponse.value =
+                    Resource.error(data = null, message = exception.message ?: "Error Occurred!")
+
+            }
         }
+
     }
 
-    fun getPopularMovies() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = repo.getPopularMovies()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+    private fun getPopularMovies()  {
+
+        viewModelScope.launch {
+            _moviePopularResponse.value = Resource.loading(data = null)
+
+            try {
+                _moviePopularResponse.value = Resource.success(data = repo.getPopularMovies())
+            } catch (exception: Exception) {
+                _moviePopularResponse.value =
+                    Resource.error(data = null, message = exception.message ?: "Error Occurred!")
+
+            }
         }
     }
+    private fun getComingSoonMovies()  {
 
+        viewModelScope.launch {
+            _movieSoonResponse.value = Resource.loading(data = null)
 
-    fun getComingSoonMovies() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
+            try {
+                _movieSoonResponse.value = Resource.success(data = repo.getComingSoon())
+            } catch (exception: Exception) {
+                _movieSoonResponse.value =
+                    Resource.error(data = null, message = exception.message ?: "Error Occurred!")
 
-        try {
-            emit(Resource.success(data = repo.getComingSoon()))
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            }
         }
     }
+    private fun getTopHorrorMovies() {
 
-    fun getTopHorrorMovies() = liveData(Dispatchers.IO) {
+        viewModelScope.launch {
+            _movieHorrorResponse.value = Resource.loading(data = null)
 
+            try {
+                _movieHorrorResponse.value = Resource.success(data = repo.getTopHorrorMovies())
+            } catch (exception: Exception) {
+                _movieHorrorResponse.value =
+                    Resource.error(data = null, message = exception.message ?: "Error Occurred!")
 
-        emit(Resource.loading(data = null))
-
-        try {
-            emit(Resource.success(data = repo.getTopHorrorMovies()))
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-        }
-    }
-
-    fun getTopActionMovies() = liveData(Dispatchers.IO) {
-
-        emit(Resource.loading(data = null))
-
-        try {
-            emit(Resource.success(data = repo.getTopActionMovies()))
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-        }
-    }
-
-    fun getTopRomanceMovies() = liveData(Dispatchers.IO) {
-
-        Timber.e("MoviesFragmentRepo")
-
-        emit(Resource.loading(data = null))
-        Timber.e("Resource.loading()")
-
-        try {
-            emit(Resource.success(data = repo.getTopRomanceMovies()))
-            Timber.e("Resource.success()")
-
-        } catch (exception: Exception) {
-            Timber.e(exception)
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            }
         }
     }
 
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+
+    private fun getTopActionMovies()  {
+
+        viewModelScope.launch {
+            _movieActionResponse.value = Resource.loading(data = null)
+
+            try {
+                _movieActionResponse.value = Resource.success(data = repo.getTopActionMovies())
+            } catch (exception: Exception) {
+                _movieActionResponse.value =
+                    Resource.error(data = null, message = exception.message ?: "Error Occurred!")
+
+            }
+        }
     }
+
+    private fun getTopRomanceMovies()  {
+
+        viewModelScope.launch {
+            _movieRomanceResponse.value = Resource.loading(data = null)
+
+            try {
+                _movieRomanceResponse.value = Resource.success(data = repo.getTopRomanceMovies())
+            } catch (exception: Exception) {
+                _movieRomanceResponse.value =
+                    Resource.error(data = null, message = exception.message ?: "Error Occurred!")
+
+            }
+        }
+    }
+
 
 }
