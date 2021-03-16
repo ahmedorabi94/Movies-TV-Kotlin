@@ -26,7 +26,7 @@ class TVShowFragemnt : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.t_v_show_fragemnt, container, false)
         binding.isConnected = true
@@ -38,7 +38,7 @@ class TVShowFragemnt : Fragment() {
 
 
     private fun setupObservers() {
-        viewModel.getTopRatedTVSHOWS().observe(viewLifecycleOwner, {
+        viewModel.movieTopRatedResponse.observe(viewLifecycleOwner, {
 
             it?.let { resource ->
                 when (resource.status) {
@@ -66,7 +66,7 @@ class TVShowFragemnt : Fragment() {
                 }
             }
         })
-        viewModel.getPopularTVSHOWS().observe(viewLifecycleOwner, {
+        viewModel.moviePopularResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
 
@@ -91,7 +91,7 @@ class TVShowFragemnt : Fragment() {
                 }
             }
         })
-        viewModel.getAiringTodayTVSHOWS().observe(viewLifecycleOwner, {
+        viewModel.movieAiringTodayResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
 
@@ -117,7 +117,7 @@ class TVShowFragemnt : Fragment() {
                 }
             }
         })
-        viewModel.getOnTheAirTVSHOWS().observe(viewLifecycleOwner, {
+        viewModel.movieOnTheAirResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
 
@@ -144,9 +144,7 @@ class TVShowFragemnt : Fragment() {
                 }
             }
         })
-
-
-        viewModel.getTopActionTv().observe(viewLifecycleOwner, {
+        viewModel.movieActionResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
 
@@ -172,7 +170,7 @@ class TVShowFragemnt : Fragment() {
                 }
             }
         })
-        viewModel.getTopCrimeTv().observe(viewLifecycleOwner, {
+        viewModel.movieTopCrimeResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Resource.Status.SUCCESS -> {
@@ -196,7 +194,7 @@ class TVShowFragemnt : Fragment() {
                 }
             }
         })
-        viewModel.getTopComedyTv().observe(viewLifecycleOwner, {
+        viewModel.movieTopComedyResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
 
@@ -223,7 +221,7 @@ class TVShowFragemnt : Fragment() {
                 }
             }
         })
-        viewModel.getTopWarTv().observe(viewLifecycleOwner, {
+        viewModel.movieTopWarResponse.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
 
